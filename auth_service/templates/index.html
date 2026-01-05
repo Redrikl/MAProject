@@ -1,0 +1,18 @@
+<!-- auth_service/templates/index.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">User Platform — демо</h1>
+        <p class="card-text">
+            Простое приложение для экзамена: регистрация, вход и личная страница.
+        </p>
+        {% if logged_in %}
+        <p>Вы вошли как <strong>{{ username }}</strong>. Перейти в <a href="{{ url_for('profile') }}">профиль</a>.</p>
+        {% else %}
+        <a class="btn btn-primary" href="{{ url_for('register') }}">Зарегистрироваться</a>
+        <a class="btn btn-outline-primary" href="{{ url_for('login') }}">Войти</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

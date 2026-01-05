@@ -1,0 +1,18 @@
+<!-- auth_service/templates/profile.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h2>Профиль: {{ user.username }}</h2>
+        <p><strong>ID:</strong> {{ user.id }}</p>
+        <p><strong>Email:</strong> {{ user.email or "—" }}</p>
+        <p><strong>Статус:</strong> {{ user.status }}</p>
+        <p><strong>Создан:</strong> {{ user.created_at }}</p>
+
+        <a class="btn btn-outline-primary" href="{{ url_for('index') }}">На главную</a>
+        <form method="post" action="{{ url_for('logout') }}" style="display:inline;">
+            <button class="btn btn-danger">Выйти</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
