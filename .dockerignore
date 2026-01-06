@@ -1,0 +1,9 @@
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.git
+.gitignore
+dev_db.sqlite3
+alembic/versions/__pycache__
