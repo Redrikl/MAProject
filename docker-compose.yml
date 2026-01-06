@@ -1,7 +1,7 @@
-version: "3.8"
 services:
   db:
     image: postgres:15
+    restart: unless-stopped
     environment:
       POSTGRES_USER: exam
       POSTGRES_PASSWORD: exam
@@ -12,13 +12,19 @@ services:
       - "5432:5432"
 
   web:
-    build: ./auth_service
+    build: .
+    depends_on:
+      - db
     env_file:
       - ./auth_service/.env
     ports:
       - "5000:5000"
-    depends_on:
-      - db
+    volumes:
+      - ./auth_service:/app/auth_service
+    # Если захотим запускать миграцию автоматически, можно раскомментировать команду ниже,
+    # но лучше запускать миграции вручную после ожидания старта БД:
+    # command: ["sh", "-c", "cd auth_service && alembic upgrade head && python -m auth_service.app"]
+    restart: unless-stopped
 
 volumes:
   db-data:
